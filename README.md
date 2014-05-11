@@ -27,10 +27,10 @@ Install instructions
 
 To run the script just run:
 
-	wget -qO- https://raw.github.com/flower-pot/desktop-install/master/install.sh | sudo bash
+	wget -qO- https://raw.github.com/jannishuebl/desktop-install/master/install.sh | sudo bash
 
 To use the script in silent mode use this command. (silent mode installs everything)
 
-	wget -qO- https://raw.github.com/flower-pot/desktop-install/master/install.sh | sudo bash -s -- --silent
+	wget -qO- https://raw.github.com/jannishuebl/desktop-install/master/install.sh | sudo bash -s -- --silent
 
 That's it, have fun! :)
