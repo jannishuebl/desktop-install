@@ -22,6 +22,8 @@ This includes:
 
 * [nodejs, npm, karma](http://nodejs.org/)
 
+* [chef](https://wiki.opscode.com/display/chef/Home)
+
 Install instructions
 --------------------
 
@@ -32,5 +34,9 @@ To run the script just run:
 To use the script in silent mode use this command. (silent mode installs everything)
 
 	wget -qO- https://raw.github.com/jannishuebl/desktop-install/master/install.sh | sudo bash -s -- --silent
+
+To only install vim, zsh and dotfiles in silent mode use the following command
+
+	wget -qO- https://raw.github.com/flower-pot/desktop-install/master/install.sh | sudo bash -s -- --silent --dotfiles
 
 That's it, have fun! :)
