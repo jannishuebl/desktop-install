@@ -107,7 +107,7 @@ function install_dotfiles() {
   curl -L https://raw.github.com/maksimr/dotfiles/master/gnome-terminal-themes/molokai.sh | sudo -u "${SUDO_USER}" -H sh
 
   rm "${homedir}/.zshrc"
-  sudo -u "${SUDO_USER}" -H git clone https://github.com/jannishuebl/dotfiles.git "${homedir}/dotfiles"
+  #sudo -u "${SUDO_USER}" -H git clone https://github.com/jannishuebl/dotfiles.git "${homedir}/dotfiles"
   ln -s "${homedir}/dotfiles/zsh/flopska.zsh-theme" "${homedir}/.oh-my-zsh/themes/flopska.zsh-theme"
   ln -s "${homedir}/dotfiles/zsh/zshrc" "${homedir}/.zshrc"
 
