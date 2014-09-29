@@ -16,7 +16,7 @@ function echo_bold {
 }
 
 function install_essentials() {
-  echo_headline "INSTALLING ESSENTIALS
+  echo_headline "INSTALLING ESSENTIALS"
   
   echo_bold "add ppa"
   sudo add-apt-repository ppa:webupd8team/java
