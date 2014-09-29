@@ -16,7 +16,10 @@ function echo_bold {
 }
 
 function install_essentials() {
-  echo_headline "INSTALLING ESSENTIALS"
+  echo_headline "INSTALLING ESSENTIALS
+  
+  echo_bold "add ppa"
+  sudo add-apt-repository ppa:webupd8team/java
 
   echo_bold "update apt cache"
   apt-get update
@@ -29,6 +32,9 @@ function install_essentials() {
 
   echo_bold "install instant messanger"
   apt-get install -q -y irssi
+  
+  echo_bold "install oracle java"
+  apt-get install -q -y oracle-java7-installer 
 
   echo_bold "install webbrowsers"
   apt-get install -q -y firefox chromium-browser
