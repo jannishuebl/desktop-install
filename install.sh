@@ -57,36 +57,7 @@ function install_rails() {
   su -l "${SUDO_USER}" -c "source \"${homedir}/.rvm/scripts/rvm\""
 }
 
-function install_ansible() {
-  echo_headline "INSTALLING ANSIBLE"
 
-  echo_bold "add required repository"
-  add-apt-repository -y ppa:rquillo/ansible
-
-  echo_bold "update apt cache"
-  apt-get update  -q -y
-
-  echo_bold "install ansible"
-  apt-get install -q -y ansible
-}
-
-function install_vagrant() {
-  echo_headline "INSTALLING VAGRANT"
-
-  LATEST_VAGRANT_32="https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.3_i686.deb"
-  LATEST_VAGRANT_64="https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.3_x86_64.deb"
-
-  ## Vagrant
-  apt-get install -y dpkg virtualbox
-  URL="$LATEST_VAGRANT_64"
-  ARCHITECTURE=`uname -m`
-  if [ "$ARCHITECTURE" != "x86_64" ]; then
-    URL=$LATEST_VAGRANT_32
-  fi
-  FILE="/tmp/vagrant.deb"; 
-  wget "$URL" -O $FILE && dpkg -i $FILE; 
-  rm $FILE
-}
 
 function install_dotfiles() {
   echo_headline "INSTALLING VIM, ZSH, AND DOTFILES"
@@ -94,10 +65,10 @@ function install_dotfiles() {
   echo_bold "update apt cache"
   apt-get update
 
-  apt-get install -q -y stow zsh libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev mercurial ruby1.9.1 ruby1.9.1-dev git build-essential curl
+  apt-get install -q -y stow zsh libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev mercurial git build-essential curl
 
   hg clone https://vim.googlecode.com/hg/ /tmp/vim
-  (cd /tmp/vim/src; ./configure --with-features=huge --enable-gui=gnome2 --enable-rubyinterp)
+  (cd /tmp/vim/src; ./configure --with-features=huge --enable-gui=gnome2 --enable-rubyinterp --enable-pythoninterp)
   make -C /tmp/vim/src
   make -C /tmp/vim/src install
   rm -rf /tmp/vim
@@ -106,7 +77,7 @@ function install_dotfiles() {
   curl -L https://raw.github.com/maksimr/dotfiles/master/gnome-terminal-themes/molokai.sh | sudo -u "${SUDO_USER}" -H sh
 
   rm "${homedir}/.zshrc"
-  #sudo -u "${SUDO_USER}" -H git clone https://github.com/jannishuebl/dotfiles.git "${homedir}/dotfiles"
+  sudo -u "${SUDO_USER}" -H git clone https://github.com/jannishuebl/dotfiles.git "${homedir}/dotfiles"
   ln -s "${homedir}/dotfiles/zsh/flopska.zsh-theme" "${homedir}/.oh-my-zsh/themes/flopska.zsh-theme"
   ln -s "${homedir}/dotfiles/zsh/zshrc" "${homedir}/.zshrc"
 
@@ -118,11 +89,11 @@ function install_dotfiles() {
   stow --target=$homedir vim
   )
 
-  (
-  cd ${homedir}/.vim/bundle/command-t/ruby/command-t/
-  sudo ruby extconf.rb
-  sudo make
-  )
+  git clone https://github.com/jannishuebl/dotvim.git
+  
+  ln -sfn dotvim .vim
+  ln -sfn dotvim/vimrc .vimrc
+  cd .vim; make install
 
   chsh $SUDO_USER -s /bin/zsh
 }
